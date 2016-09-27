@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
   before_create :send_sms
+  before_save :define_from
   # before_save :tos
   has_and_belongs_to_many :contacts
   accepts_nested_attributes_for :contacts
@@ -9,6 +10,9 @@ class Message < ActiveRecord::Base
   # def tos=(tos)
   #  tos.reject(&:blank?)
   # end
+  def define_from
+    self.from = "9717035923"
+  end
 
   def send_sms
     begin

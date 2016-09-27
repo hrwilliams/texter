@@ -13,11 +13,25 @@
 
 
   <%= form_for @message do |f| %>
-    <%= f.label :to %>
-    <%= f.collection_check_boxes(:to, Contact.all, :phone_number, :name, :include_hidden => false) %>
-    <%= f.label :from %>
-    <%= f.text_field :from %>
-    <%= f.label :body %>
-    <%= f.text_field :body %>
+    <div class="form-group">
+      <%= f.label :to %>: <br>
+      <%= f.collection_check_boxes(:to, Contact.all, :phone_number, :name, :include_hidden => false, class: "form-group") %>
+    </div>
+
+    <!-- <%= f.fields_for @message.contacts.build do |contact_form|%>
+      <%= f.label "new_contact_name:" %>
+      <%= contact_form.text_field :name %>
+      <%= f.label "new_contact_number:" %>
+      <%= contact_form.text_field :phone_number %>
+    <% end %> -->
+
+    <!-- <div class="form-group">
+      <%= f.label :from %>:
+      <%= f.text_field :from %>
+    </div> -->
+    <div class="form-group">
+      <%= f.label :body %>:
+      <%= f.text_field :body %>
+    </div>
     <%= f.submit %>
   <% end %>
