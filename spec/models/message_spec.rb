@@ -9,8 +9,8 @@ describe Message do
   end
 
   it "adds an error if the number is invalid" do
-    message = Message.new(:body => 'hi', :to => '123245', :from => '9717035923')
+    message = Message.new(:body => 'hi', :to => '1111', :from => '9717035923')
     message.save
-    message.errors.should eq 'something bad'
+    message.errors[:base].should eq ["The 'To' number 1111 is not a valid phone number."]
   end
 end
