@@ -9,12 +9,15 @@
   </ul>
 <% end %>
 
-<%= form_for @message do |f| %>
-  <%= f.label :to %>
-  <%= f.text_field :to %>
-  <%= f.label :from %>
-  <%= f.text_field :from %>
-  <%= f.label :body %>
-  <%= f.text_field :body %>
-  <%= f.submit %>
-<% end %>
+
+
+
+  <%= form_for @message do |f| %>
+    <%= f.label :to %>
+    <%= f.collection_check_boxes(:to, Contact.all, :phone_number, :name, :include_hidden => false) %>
+    <%= f.label :from %>
+    <%= f.text_field :from %>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+    <%= f.submit %>
+  <% end %>

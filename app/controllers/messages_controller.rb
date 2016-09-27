@@ -4,10 +4,16 @@ class MessagesController < ApplicationController
   end
 
   def new
+    if params.include?(:contact_id)
+      @contact = Contact.find(params[:contact_id])
+    end
     @message = Message.new
   end
 
   def create
+    if params.include?(:id)
+      @contact = Contact.find(params[:id])
+    end
     @message = Message.new(message_params)
     if @message.save
       flash[:notice] = "Your message was sent!"
@@ -24,6 +30,6 @@ class MessagesController < ApplicationController
   private
 
     def message_params
-      params.require(:message).permit(:to, :from, :body)
+      params.require(:message).permit(:from, :body, to:[])
     end
   end
